@@ -1,3 +1,11 @@
 export const environment = {
-  production: true
+  production: false,
+  auth: {
+    domain: '',
+    clientId: '',
+  },
+  supabase: {
+    url: '',
+    key: '',
+  }
 };
