@@ -1,0 +1,124 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$minecraft-market-tracker-primary: mat.define-palette(
+    (
+      50: #e4f6fa,
+      100: #bde9f3,
+      200: #97dbeb,
+      300: #7acce0,
+      400: #6ec1d6,
+      500: #6cb7cc,
+      600: #65a7b9,
+      700: #5c92a0,
+      800: #547e87,
+      900: #425b5f,
+      contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: white,
+        // ... continues to 900
+      )
+    )
+);
+$minecraft-market-tracker-accent: mat.define-palette((
+  50: #f3e2f1,
+  100: #e1b5de,
+  200: #cd84c8,
+  300: #b752b2,
+  400: #a726a2,
+  500: #970093,
+  600: #8a008e,
+  700: #780088,
+  800: #680080,
+  900: #4a0074,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    // ... continues to 900
+  )
+), 200, 100, 300);
+$minecraft-market-tracker-background: mat.define-palette(
+    (
+      50: #1A2026,
+      100: #1A2026,
+      200: #1A2026,
+      300: #1A2026,
+      400: #1A2026,
+      500: #1A2026,
+      600: #1A2026,
+      700: #1A2026,
+      800: #1A2026,
+      900: #1A2026,
+      contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: white,
+        // ... continues to 900
+      )
+    )
+);
+
+// The warn palette is optional (defaults to red).
+$minecraft-market-tracker-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$minecraft-market-tracker-theme: mat.define-dark-theme((
+  color: (
+    primary: $minecraft-market-tracker-primary,
+    accent: $minecraft-market-tracker-accent,
+    warn: $minecraft-market-tracker-warn,
+  ),
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($minecraft-market-tracker-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+$background:	#1A2026;
+$foreground:	white;
+$color0:	#242D35;
+$color1:	#FB6396;
+$color2:	#94CF95;
+$color3:	#F692B2;
+$color4:	#6EC1D6;
+$color5:	#CD84C8;
+$color6:	#7FE4D2;
+$color7:	#FFFFFF;
+$vibrant_color0:	#526170;
+$vibrant_color1:	#F92D72;
+$vibrant_color2:	#6CCB6E;
+$vibrant_color3:	#F26190;
+$vibrant_color4:	#4CB9D6;
+$vibrant_color5:	#C269BC;
+$vibrant_color6:	#58D6BF;
+$vibrant_color7:	#F4F5F2;
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $background;
+  color: $foreground;
+}
