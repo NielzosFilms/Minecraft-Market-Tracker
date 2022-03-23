@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "./auth.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'minecraft-market-tracker';
+  constructor(public auth: AuthService) {
+  }
+
+  public logout(): void {
+    this.auth.signOut().catch((error) => {
+      console.log(error);
+    });
+  }
 }

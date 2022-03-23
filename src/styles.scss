@@ -93,29 +93,7 @@ $minecraft-market-tracker-theme: mat.define-dark-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-$background:	#1A2026;
-$foreground:	white;
-$color0:	#242D35;
-$color1:	#FB6396;
-$color2:	#94CF95;
-$color3:	#F692B2;
-$color4:	#6EC1D6;
-$color5:	#CD84C8;
-$color6:	#7FE4D2;
-$color7:	#FFFFFF;
-$vibrant_color0:	#526170;
-$vibrant_color1:	#F92D72;
-$vibrant_color2:	#6CCB6E;
-$vibrant_color3:	#F26190;
-$vibrant_color4:	#4CB9D6;
-$vibrant_color5:	#C269BC;
-$vibrant_color6:	#58D6BF;
-$vibrant_color7:	#F4F5F2;
-
-$padding: 40px;
-$margin: 20px;
-$border-radius: 8px;
-$box-shadow: 20px 20px 40px 0px rgba(0,0,0,0.3);
+@import "variables";
 
 html, body {
   height: 100%;
@@ -157,3 +135,11 @@ body {
 .w-30 { width: 30%; }
 .w-20 { width: 20%; }
 .w-10 { width: 10%; }
+
+.snackbar-error {
+  background-color: $color1;
+}
+
+.snackbar-success {
+  background-color: $color2;
+}
