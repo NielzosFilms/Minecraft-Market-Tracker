@@ -1,0 +1,34 @@
+@import "src/variables";
+
+.flex-container {
+  display: flex;
+}
+
+.category-menu {
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 300px;
+  max-height: 300px;
+}
+
+.category-details {
+  flex-grow: 1;
+}
+
+.spinner {
+  margin: $margin auto auto;
+}
+
+.mat-list-single-selected-option {
+  background: rgba($vibrant_color0, 0.3);
+  color: $color4;
+}
+
+table {
+  background-color: transparent;
+  width: 100%;
+}
+
+.muted {
+  color: $vibrant_color0;
+}

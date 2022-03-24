@@ -1,0 +1,31 @@
+<div class="flex-container">
+  <div class="spinner" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="paper category-menu" *ngIf="!loading">
+    <h1>Categories</h1>
+    <mat-selection-list [(ngModel)]="selectedCategory" [multiple]="false">
+      <mat-list-option *ngFor="let category of categories" [value]="category">
+        {{category.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <div class="paper category-details" *ngIf="selectedCategory[0]">
+    <h2>{{selectedCategory[0].name}}</h2>
+    <div *ngFor="let item of selectedCategory[0].items">
+      <h3>{{item.name}}</h3>
+      <mat-list>
+        <mat-list-item>
+          {{item.price}} <mat-icon>diamond</mat-icon> for {{getNumberInStacks(item.amount_of_items)}} stacks
+        </mat-list-item>
+        <mat-list-item *ngIf="item.amount_of_diamonds_per_shulker">
+          {{item.amount_of_diamonds_per_shulker}} <mat-icon>diamond</mat-icon> for 1 Shulker Box
+        </mat-list-item>
+      </mat-list>
+      <mat-divider></mat-divider>
+    </div>
+    <h3 *ngIf="selectedCategory[0].items.length === 0" class="muted">
+      No items.
+    </h3>
+  </div>
+</div>

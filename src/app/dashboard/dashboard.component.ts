@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {ItemService} from "../database-services/item.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +7,7 @@ import {ItemService} from "../database-services/item.service";
 })
 export class DashboardComponent {
 
-  constructor(private itemService: ItemService) {
-    itemService.getCategories().then(result => {
-      console.log(result);
-    });
-
-    itemService.getItems().then(result => {
-      console.log(result);
-    }).catch((error) => {
-      console.log("ERROR CATCHED", error);
-    });
+  constructor() {
   }
 
 }

@@ -20,6 +20,9 @@ import { NavComponent } from './nav/nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { WhatWeSellComponent } from './what-we-sell/what-we-sell.component';
+import {MatTableModule} from "@angular/material/table";
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NavComponent,
     PageNotFoundComponent,
     DashboardComponent,
+    WhatWeSellComponent,
+    TeamComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +50,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatTableModule,
   ],
   providers: [
   ],

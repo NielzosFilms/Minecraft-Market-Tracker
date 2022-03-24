@@ -7,7 +7,9 @@ export interface Category {
 export interface Item {
   id: string;
   name: string;
-  amount_per_diamond: number;
-  bulk_amount_per_diamond: number | null;
+  price: number;
+  amount_of_items: number;
+  amount_of_diamonds_per_shulker: number | null;
+  category: Category | string;
   created_at: string;
 }

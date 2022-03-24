@@ -23,6 +23,19 @@ export class ItemService {
     })
   }
 
+  public getCategoriesWithItems(): Promise<Category[]> {
+    return new Promise<Category[]>(async (resolve, reject) => {
+      const categories = await this.getCategories();
+      const items = await this.getItems();
+      resolve(categories.map(category => {
+        return {
+          ...category,
+          items: items.filter(item => item.category === category.id),
+        }
+      }))
+    })
+  }
+
   public getItems(): Promise<Item[]> {
     return new Promise<Item[]>(async (resolve, reject) => {
       this.supabase
