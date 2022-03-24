@@ -3,3 +3,11 @@
 .spinner {
   margin: $margin auto auto;
 }
+
+.flex-container {
+  display: flex;
+}
+
+.grow {
+  flex-grow: 1;
+}
