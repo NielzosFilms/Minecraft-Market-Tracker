@@ -1,0 +1,51 @@
+@import "src/variables";
+
+nav .active {
+  color: $color4;
+  border-bottom: 1px solid $color4;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: $color0;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+nav li a:hover {
+  background-color: $color4;
+  color: white;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-routes {
+  flex-grow: 1;
+  background-color: $color0;
+}
+
+.auth-buttons li a {
+  color: $vibrant_color0;
+  user-select: none;
+  cursor: pointer;
+}
+.auth-buttons li a:hover {
+  background-color: $color5;
+}

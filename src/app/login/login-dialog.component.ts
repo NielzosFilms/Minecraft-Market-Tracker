@@ -2,19 +2,23 @@ import {Component} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login-dialog.component.html',
+  styleUrls: ['./login-dialog.component.scss']
 })
-export class LoginComponent {
+export class LoginDialogComponent {
   public loginForm: FormGroup;
   public loading = false;
   public errors: string[] = [];
   public callbackMessage = "";
 
-  constructor(private auth: AuthService, private fb: FormBuilder, private snackbar: MatSnackBar) {
+  constructor(private auth: AuthService,
+              private fb: FormBuilder,
+              private snackbar: MatSnackBar,
+              private dialogRef: MatDialogRef<LoginDialogComponent>) {
     this.loginForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]]
     });
@@ -34,6 +38,7 @@ export class LoginComponent {
           duration: 5000,
           panelClass: "snackbar-success",
         });
+        this.dialogRef.close();
       }
     });
     this.loading = false;

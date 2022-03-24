@@ -1,21 +1,12 @@
-<div class="content-container">
-  <div class="paper">
-    <h1>Hello world</h1>
-  </div>
+<app-nav></app-nav>
 
+<div class="content-container">
   <div class="paper" *ngIf="auth.isAuthenticated()">
     <mat-list>
       <mat-list-item><strong>Email:</strong>{{ auth.profile.email }}</mat-list-item>
       <mat-list-item><strong>Name:</strong>{{ auth.profile.username }}</mat-list-item>
     </mat-list>
   </div>
-
-  <app-login *ngIf="!auth.isAuthenticated()"></app-login>
-
-  <div class="paper" *ngIf="auth.isAuthenticated()">
-    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
-  </div>
-
 
   <router-outlet></router-outlet>
 </div>
