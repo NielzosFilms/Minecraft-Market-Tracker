@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {SupabaseService} from "../supabase.service";
 import {PostgrestResponse, SupabaseClient} from "@supabase/supabase-js";
-import {Category, Item} from "./item-type";
+import {Category, Item, ItemForSale} from "./item-type";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
@@ -23,10 +23,10 @@ export class ItemService {
     })
   }
 
-  public getCategoriesWithItems(): Promise<Category[]> {
+  public getCategoriesWithItemsForSale(): Promise<Category[]> {
     return new Promise<Category[]>(async (resolve, reject) => {
       const categories = await this.getCategories();
-      const items = await this.getItems();
+      const items = await this.getItemsForSale();
       resolve(categories.map(category => {
         return {
           ...category,
@@ -42,6 +42,16 @@ export class ItemService {
         .from('item')
         .select('*')
         .then(result => this.handleResult<Item[]>(result, resolve, reject));
+    })
+  }
+
+  public getItemsForSale(): Promise<ItemForSale[]> {
+    return new Promise<ItemForSale[]>(async (resolve, reject) => {
+      this.supabase
+        .from('item')
+        .select('*')
+        .is('for_sale', true)
+        .then(result => this.handleResult<ItemForSale[]>(result, resolve, reject));
     })
   }
 

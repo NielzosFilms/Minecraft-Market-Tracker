@@ -14,7 +14,7 @@ export class WhatWeSellComponent {
 
   constructor(private itemService: ItemService) {
     this.loading = true;
-    itemService.getCategoriesWithItems().then(result => {
+    itemService.getCategoriesWithItemsForSale().then(result => {
       this.categories = result;
       this.selectedCategory = [this.categories[0]];
       this.loading = false;

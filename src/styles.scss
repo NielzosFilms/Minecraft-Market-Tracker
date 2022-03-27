@@ -151,6 +151,12 @@ body {
 .mat-dialog-container {
   padding: $padding !important;
   border-radius: $border-radius !important;
-  background-color: $color0 !important;
+  background-color: $background !important;
   box-shadow: $box-shadow !important;
+}
+
+.global-btn {
+  position: fixed;
+  right: $margin + $padding;
+  bottom: $margin + $padding;
 }

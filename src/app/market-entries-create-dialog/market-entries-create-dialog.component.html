@@ -1,0 +1,38 @@
+<h2>Create market entry</h2>
+
+<form [formGroup]="entryForm" (ngSubmit)="handleSubmit(entryForm)" class="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Choose item</mat-label>
+    <mat-select formControlName="selectedItem">
+      <mat-option value="valid">Valid option</mat-option>
+      <mat-option value="invalid">Invalid option</mat-option>
+    </mat-select>
+    <mat-error *ngIf="entryForm.controls['selectedItem'].hasError('required')">You must make a selection</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" placeholder="Price" formControlName="price">
+    <mat-error *ngIf="entryForm.controls['price'].hasError('pattern')">
+      Please enter a number
+    </mat-error>
+    <mat-error *ngIf="entryForm.controls['price'].hasError('required')">Price is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Transaction Date</mat-label>
+    <input matInput [matDatepicker]="datePicker" formControlName="transactionDate">
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+    <mat-error *ngIf="entryForm.controls['transactionDate'].hasError('required')">Date is required</mat-error>
+  </mat-form-field>
+
+  <mat-slide-toggle formControlName="isBulk">Bulk</mat-slide-toggle>
+  <mat-slide-toggle formControlName="isPurchase">Purchase</mat-slide-toggle>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!entryForm.valid">
+      Create
+    </button>
+  </div>
+</form>

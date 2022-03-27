@@ -23,6 +23,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { WhatWeSellComponent } from './what-we-sell/what-we-sell.component';
 import {MatTableModule} from "@angular/material/table";
 import { TeamComponent } from './team/team.component';
+import { MarketEntriesComponent } from './market-entries/market-entries.component';
+import { MarketEntriesCreateDialogComponent } from './market-entries-create-dialog/market-entries-create-dialog.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -33,6 +39,8 @@ import { TeamComponent } from './team/team.component';
     DashboardComponent,
     WhatWeSellComponent,
     TeamComponent,
+    MarketEntriesComponent,
+    MarketEntriesCreateDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +59,10 @@ import { TeamComponent } from './team/team.component';
     MatSnackBarModule,
     MatDialogModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatSelectModule,
   ],
   providers: [
   ],
