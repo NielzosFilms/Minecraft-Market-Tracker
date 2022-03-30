@@ -1,18 +1,22 @@
 export interface Category {
   id: string;
   name: string;
-  items: ItemForSale[];
+  items: Item[];
 }
 
 export interface Item {
   id: string;
   name: string;
+  for_sale: boolean;
+  category_id: string;
   created_at: string;
-  category: Category | string;
+  price?: Price;
+  category?: Category;
 }
 
-export interface ItemForSale extends Item {
+export interface Price {
+  item_id: string;
   price: number;
-  amount_of_items: number;
-  amount_of_diamonds_per_shulker: number | null;
+  amount: number;
+  bulk_price: number;
 }

@@ -22,6 +22,7 @@ export class MarketEntriesComponent {
   }
 
   public openCreateDialog(): void {
+    const test = 7 * 1;
     const dialogRef = this.dialog.open(MarketEntriesCreateDialogComponent, {
       width: '500px',
     });

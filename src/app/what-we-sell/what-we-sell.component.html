@@ -14,12 +14,12 @@
     <h2>{{selectedCategory[0].name}}</h2>
     <div *ngFor="let item of selectedCategory[0].items">
       <h3>{{item.name}}</h3>
-      <mat-list>
+      <mat-list *ngIf="item.price">
         <mat-list-item>
-          {{item.price}} <mat-icon>diamond</mat-icon> for {{getNumberInStacks(item.amount_of_items)}} stacks
+          {{item.price.price}} <mat-icon>diamond</mat-icon> for {{getNumberInStacks(item.price.amount)}} stacks
         </mat-list-item>
-        <mat-list-item *ngIf="item.amount_of_diamonds_per_shulker">
-          {{item.amount_of_diamonds_per_shulker}} <mat-icon>diamond</mat-icon> for 1 Shulker Box
+        <mat-list-item *ngIf="item.price.bulk_price">
+          {{item.price.bulk_price}} <mat-icon>diamond</mat-icon> for 1 Shulker Box
         </mat-list-item>
       </mat-list>
       <mat-divider></mat-divider>
