@@ -18,5 +18,5 @@ export interface Price {
   item_id: string;
   price: number;
   amount: number;
-  bulk_price: number;
+  bulk_price?: number;
 }

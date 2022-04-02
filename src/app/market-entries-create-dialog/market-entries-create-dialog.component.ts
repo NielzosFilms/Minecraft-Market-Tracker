@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MarketEntry} from "../database-services/market-entry-type";
 
 @Component({
   selector: 'app-market-create-dialog',
@@ -28,7 +29,7 @@ export class MarketEntriesCreateDialogComponent {
   }
 
   handleSubmit(entryForm: any) {
-    console.log(entryForm.value);
+    console.log(entryForm.value as MarketEntry);
   }
 
 }
