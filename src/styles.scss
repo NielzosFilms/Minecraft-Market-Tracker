@@ -118,6 +118,8 @@ body {
 }
 
 .paper {
+  min-height: 300px;
+  min-width: 200px;
   padding: $padding;
   margin: $margin;
   border-radius: $border-radius;
@@ -159,4 +161,16 @@ body {
   position: fixed;
   right: $margin + $padding;
   bottom: $margin + $padding;
+}
+
+.spinner {
+  margin: $margin auto auto;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.grow {
+  flex-grow: 1;
 }

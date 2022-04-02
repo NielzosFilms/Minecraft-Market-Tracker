@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {PostgrestResponse, SupabaseClient} from "@supabase/supabase-js";
 import {SupabaseService} from "../supabase.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MarketEntry} from "./market-entry-type";
+import {MarketEntry, MarketEntryInput} from "./market-entry-type";
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +23,12 @@ export class MarketEntryService {
     });
   }
 
-  public createMarketEntry(entry: MarketEntry) {
-    return new Promise<MarketEntry>(async (resolve, reject) => {
+  public createMarketEntry(entry: MarketEntryInput) {
+    return new Promise<MarketEntryInput>(async (resolve, reject) => {
       this.supabase
         .from('market_entry')
         .insert(entry)
-        .then(result => this.handleResult<MarketEntry>(result, resolve, reject));
+        .then(result => this.handleResult<MarketEntryInput>(result, resolve, reject));
     });
   }
 
