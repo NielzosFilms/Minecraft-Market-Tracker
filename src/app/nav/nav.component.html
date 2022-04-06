@@ -4,6 +4,9 @@
       <li *ngFor="let route of publicRoutes">
         <a routerLink="{{route.route}}" routerLinkActive="active">{{route.label}}</a>
       </li>
+      <li>
+        <a href="https://github.com/NielzosFilms/Minecraft-Market-Tracker" target="_blank"><i class="fa fa-github" style="font-size: 20px"></i></a>
+      </li>
     </ul>
     <ul *ngIf="auth.isAuthenticated()" class="auth-routes">
       <li *ngFor="let route of authRoutes">
