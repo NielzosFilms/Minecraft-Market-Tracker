@@ -12,3 +12,23 @@ This project keeps track of the sales on our Minecraft Server
 **Hosting**
 - [Netlify](https://www.netlify.com/)
 - [Supabase](https://supabase.com/)
+
+## Getting it running
+Clone the repo
+
+Run:
+```shell
+npm install
+```
+
+Copy the `environment-template.ts` to 
+- `environment.ts`
+- `environment.spec.ts`
+- `environment.prod.ts`
+
+And fill in the Supabase credentials.
+
+Finally start the app:
+```shell
+npm start
+```
