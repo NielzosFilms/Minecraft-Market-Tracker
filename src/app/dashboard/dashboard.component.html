@@ -1,1 +1,26 @@
-<p>dashboard works!</p>
+<div class="paper" style="height: 700px">
+  <h1>Profits</h1>
+  <ngx-charts-pie-chart
+    [results]="saleData"
+    [legend]="true"
+    [legendTitle]="'Sales'"
+    [view]="[1000,600]"
+  >
+  </ngx-charts-pie-chart>
+</div>
+
+<div *ngFor="let item of items" class="paper" style="height: 500px">
+  <h1>{{item.name}}</h1>
+  <ngx-charts-line-chart
+    [results]="item.graphData"
+    [view]="[1000,400]"
+    [showGridLines]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [autoScale]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Date'"
+    [yAxisLabel]="'Amount per diamond'"
+  ></ngx-charts-line-chart>
+</div>

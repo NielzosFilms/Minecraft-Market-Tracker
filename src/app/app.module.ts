@@ -31,6 +31,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -44,30 +45,31 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MarketEntriesComponent,
     MarketEntriesCreateDialogComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatSliderModule,
-        MatButtonModule,
-        MatListModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatSnackBarModule,
-        MatDialogModule,
-        MatTableModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        MatPaginatorModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatListModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    NgxChartsModule,
+  ],
   providers: [
   ],
   bootstrap: [AppComponent]

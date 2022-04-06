@@ -60,8 +60,8 @@ export class MarketEntriesCreateDialogComponent {
       amount_of_diamonds: entryForm.value.amount_of_diamonds,
       amount: entryForm.value.amount,
       transaction_date: entryForm.value.transactionDate,
-      bulk: entryForm.value.bulk || false,
-      was_purchase: entryForm.value.was_purchase || false,
+      bulk: <boolean>entryForm.value.isBulk,
+      was_purchase: <boolean>entryForm.value.isPurchase,
       created_by: this.auth.profile.id,
     }
     this.loading = true;

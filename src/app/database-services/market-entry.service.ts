@@ -29,6 +29,21 @@ export class MarketEntryService {
     });
   }
 
+  public getMarketEntriesASC(): Promise<MarketEntry[]> {
+    return new Promise<MarketEntry[]>(async (resolve, reject) => {
+      this.supabase
+        .from('market_entry')
+        .select(`
+          *,
+          item:item_id (
+            *
+          )
+        `)
+        .order('transaction_date', {ascending: true})
+        .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
+    });
+  }
+
   public createMarketEntry(entry: MarketEntryInput) {
     return new Promise<MarketEntryInput>(async (resolve, reject) => {
       this.supabase
