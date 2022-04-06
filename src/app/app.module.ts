@@ -30,6 +30,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         MatSlideToggleModule,
         MatSelectModule,
         MatAutocompleteModule,
+        MatPaginatorModule,
     ],
   providers: [
   ],

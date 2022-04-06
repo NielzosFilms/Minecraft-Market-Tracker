@@ -22,6 +22,7 @@
     "@angular/router": "~13.3.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@supabase/supabase-js": "^1.31.1",
+    "@swimlane/ngx-charts": "^20.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "uuid": "^8.3.2",

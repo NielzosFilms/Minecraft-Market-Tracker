@@ -18,7 +18,13 @@ export class MarketEntryService {
     return new Promise<MarketEntry[]>(async (resolve, reject) => {
       this.supabase
         .from('market_entry')
-        .select('*')
+        .select(`
+          *,
+          item:item_id (
+            *
+          )
+        `)
+        .order('transaction_date', {ascending: false})
         .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
     });
   }

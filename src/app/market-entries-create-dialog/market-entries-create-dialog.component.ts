@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MarketEntryInput} from "../database-services/market-entry-type";
 import {FormItemValidator, Item} from "../database-services/item-type";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {map, Observable, startWith} from "rxjs";
 import { v4 as uuid } from 'uuid';
 import {AuthService} from "../auth.service";
@@ -14,6 +14,7 @@ import {MarketEntryService} from "../database-services/market-entry.service";
   styleUrls: ['./market-entries-create-dialog.component.scss']
 })
 export class MarketEntriesCreateDialogComponent {
+  public loading = false;
   public entryForm: FormGroup;
   private readonly items: Item[];
   public filteredItems: Observable<Item[]>;
@@ -21,7 +22,8 @@ export class MarketEntriesCreateDialogComponent {
   constructor(private fb: FormBuilder,
               private auth: AuthService,
               private marketEntryService: MarketEntryService,
-              @Inject(MAT_DIALOG_DATA) private data: MarketEntriesCreateDialogData) {
+              @Inject(MAT_DIALOG_DATA) private data: MarketEntriesCreateDialogData,
+              private dialogRef: MatDialogRef<MarketEntriesCreateDialogComponent>) {
     this.items = this.data.items;
     this.entryForm = this.fb.group({
       selectedItem: [null, [Validators.required, FormItemValidator.selectedValidValue(this.items)]],
@@ -62,9 +64,10 @@ export class MarketEntriesCreateDialogComponent {
       was_purchase: entryForm.value.was_purchase || false,
       created_by: this.auth.profile.id,
     }
-    console.log(marketEntry);
+    this.loading = true;
     this.marketEntryService.createMarketEntry(marketEntry).then(r => {
-      console.log(r);
+      this.loading = false;
+      this.dialogRef.close();
     });
   }
 
