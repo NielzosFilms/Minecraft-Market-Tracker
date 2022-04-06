@@ -9,7 +9,7 @@ export class SupabaseService {
   private readonly supabase: SupabaseClient;
 
   constructor() {
-    this.supabase = createClient(environment.supabase.url, environment.supabase.key);
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
   public getClient(): SupabaseClient {
