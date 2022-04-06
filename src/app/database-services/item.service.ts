@@ -19,6 +19,7 @@ export class ItemService {
       this.supabase
         .from('category')
         .select('*')
+        .order('name', {ascending: true})
         .then(result => this.handleResult<Category[]>(result, resolve, reject));
     })
   }
@@ -41,6 +42,7 @@ export class ItemService {
       this.supabase
         .from('item')
         .select('*')
+        .order('name', {ascending: true})
         .then(result => this.handleResult<Item[]>(result, resolve, reject));
     })
   }
@@ -64,6 +66,7 @@ export class ItemService {
         .from('item')
         .select('*')
         .is('for_sale', true)
+        .order('name', {ascending: true})
         .then(result => this.handleResult<Item[]>(result, resolve, reject));
     });
   }
