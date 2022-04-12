@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthService} from "./auth.service";
-import {SupabaseService} from "./supabase.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,6 @@ import {SupabaseService} from "./supabase.service";
 })
 export class AppComponent {
 
-  constructor(public auth: AuthService, private supabase: SupabaseService) {}
+  constructor() {
+  }
 }

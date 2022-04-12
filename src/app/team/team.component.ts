@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {ProfileService} from "../database-services/profile.service";
-import {Profile} from "../auth.service";
 
 @Component({
   selector: 'app-team',
@@ -9,7 +8,7 @@ import {Profile} from "../auth.service";
 })
 export class TeamComponent {
   public loading = false;
-  public profiles: Profile[] = [];
+  public profiles: string[] = [];
 
   constructor(private profileService: ProfileService) {
     this.loading = true;

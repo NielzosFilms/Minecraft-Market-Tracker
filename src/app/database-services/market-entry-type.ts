@@ -1,4 +1,3 @@
-import {Profile} from "../auth.service";
 import {Item} from "./item-type";
 
 export interface MarketEntry {
@@ -10,7 +9,7 @@ export interface MarketEntry {
   transaction_date: Date;
   bulk: boolean;
   was_purchase: boolean;
-  created_by: string | Profile;
+  created_by: string;
   created_at: string;
 }
 

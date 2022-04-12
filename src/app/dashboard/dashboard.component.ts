@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {SupabaseService} from "../supabase.service";
-import {SupabaseClient} from "@supabase/supabase-js";
-import {MarketEntry} from "../database-services/market-entry-type";
-import {ItemService} from "../database-services/item.service";
 import {MarketEntryService} from "../database-services/market-entry.service";
+import {NotionService} from "../notion.service";
 import {Item} from "../database-services/item-type";
+import {environment} from "../../environments/environment";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,13 +11,27 @@ import {Item} from "../database-services/item-type";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  private supabase: SupabaseClient;
-
   saleData: GraphEntry[] = [];
   items: ItemWithLineGraph[] = [];
 
-  constructor(private _supabase: SupabaseService, private itemService: ItemService, private marketService: MarketEntryService) {
-    this.supabase = _supabase.getClient();
+  constructor(private notion: NotionService, private http: HttpClient, private marketService: MarketEntryService) {
+    notion.client.databases.query({
+      database_id: '6920a5d761134f828b64e7d313a5bfc3'
+    }).then(r => {
+      console.log(r)
+    })
+
+    // http.get(`https://api.notion.com/v1/databases/6920a5d761134f828b64e7d313a5bfc3/query`, {
+    //   headers: new HttpHeaders({
+    //     'Authorization': `Bearer ${environment.notion_key}`,
+    //     // 'Content-Type': 'application/json',
+    //     // 'Access-Control-Allow-Credentials': 'true',
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Notion-Version': '2021-08-16'
+    //   }),
+    // }).subscribe(result => {
+    //   console.log(result);
+    // })
 
     this.getSalesData();
 
@@ -26,47 +39,47 @@ export class DashboardComponent {
   }
 
   private getSalesData() {
-    this.supabase
-      .from('market_entry')
-      .select('*')
-      .then(result => {
-        const reduced = result.data?.reduce((prev, cur) => {
-          if(cur.was_purchase) {
-            return {
-              ...prev,
-              spent: prev.spent = prev.spent + cur.amount_of_diamonds
-            };
-          } else {
-            return {
-              ...prev,
-              earned: prev.earned = prev.earned + cur.amount_of_diamonds
-            };
-          }
-        }, {earned: 0, spent: 0})
-        this.saleData = [
-          {name: "Diamonds earned", value: reduced.earned},
-          {name: "Diamonds spent", value: reduced.spent},
-        ]
-      });
+    // this.supabase
+    //   .from('market_entry')
+    //   .select('*')
+    //   .then(result => {
+    //     const reduced = result.data?.reduce((prev, cur) => {
+    //       if(cur.was_purchase) {
+    //         return {
+    //           ...prev,
+    //           spent: prev.spent = prev.spent + cur.amount_of_diamonds
+    //         };
+    //       } else {
+    //         return {
+    //           ...prev,
+    //           earned: prev.earned = prev.earned + cur.amount_of_diamonds
+    //         };
+    //       }
+    //     }, {earned: 0, spent: 0})
+    //     this.saleData = [
+    //       {name: "Diamonds earned", value: reduced.earned},
+    //       {name: "Diamonds spent", value: reduced.spent},
+    //     ]
+    //   });
   }
 
   private async getItemData() {
-    const items = await this.itemService.getItems();
-    const marketEntries = await this.marketService.getMarketEntriesASC();
-
-    items.forEach(item => {
-      const itemMarketEntries = marketEntries.filter(entry => entry.item_id === item.id);
-      this.items.push({
-        ...item,
-        graphData: [{
-          name: item.name,
-          series: itemMarketEntries.map<GraphEntry>(entry => ({
-            value: Math.round(entry.amount / entry.amount_of_diamonds * 100) / 100,
-            name: new Date(entry.transaction_date).toDateString(),
-          }))
-        }]
-      })
-    });
+    //   const items = await this.itemService.getItems();
+    //   const marketEntries = await this.marketService.getMarketEntriesASC();
+    //
+    //   items.forEach(item => {
+    //     const itemMarketEntries = marketEntries.filter(entry => entry.item_id === item.id);
+    //     this.items.push({
+    //       ...item,
+    //       graphData: [{
+    //         name: item.name,
+    //         series: itemMarketEntries.map<GraphEntry>(entry => ({
+    //           value: Math.round(entry.amount / entry.amount_of_diamonds * 100) / 100,
+    //           name: new Date(entry.transaction_date).toDateString(),
+    //         }))
+    //       }]
+    //     })
+    //   });
   }
 
 }
@@ -81,6 +94,6 @@ interface LineGraphEntry {
   series: GraphEntry[];
 }
 
-interface ItemWithLineGraph extends Item{
+interface ItemWithLineGraph extends Item {
   graphData: LineGraphEntry[];
 }
