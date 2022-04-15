@@ -16,7 +16,6 @@ export class WhatWeSellComponent {
     this.loading = true;
     itemService.getCategoriesWithItemsForSale().then(result => {
       this.categories = result;
-      console.log(this.categories);
       this.selectedCategory = [this.categories[0]];
       this.loading = false;
     });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Category, Item, Price} from "./item-type";
+import {Category, Item} from "./item-type";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
@@ -26,7 +26,7 @@ export class ItemService {
       resolve(categories.map(category => {
         return {
           ...category,
-          items: items.filter(item => item.category_id === category.id),
+          // items: items.filter(item => item.category_id === category.id),
         }
       }));
     })
@@ -44,12 +44,11 @@ export class ItemService {
 
   public getItemsForSaleWithPrices(): Promise<Item[]> {
     return new Promise<Item[]>(async (resolve, reject) => {
-      const prices = await this.getPrices();
       const itemsForSale = await this.getItemsForSale();
       resolve(itemsForSale.map(item => {
         return {
           ...item,
-          price: prices.find(price => price.item_id === item.id),
+          // price: prices.find(price => price.item_id === item.id),
         }
       }));
     });
@@ -63,15 +62,6 @@ export class ItemService {
       //   .is('for_sale', true)
       //   .order('name', {ascending: true})
       //   .then(result => this.handleResult<Item[]>(result, resolve, reject));
-    });
-  }
-
-  public getPrices(): Promise<Price[]> {
-    return new Promise<Price[]>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('prices')
-      //   .select('*')
-      //   .then(result => this.handleResult<Price[]>(result, resolve, reject));
     });
   }
 

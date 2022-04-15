@@ -16,10 +16,10 @@
       <h3>{{item.name}}</h3>
       <mat-list *ngIf="item.price">
         <mat-list-item>
-          {{item.price.price}} <mat-icon>diamond</mat-icon> for {{item.price.amount}} {{item.name}} ({{getNumberInStacks(item.price.amount)}} stacks)
+          {{item.price}} <mat-icon>diamond</mat-icon> for {{item.amount}} {{item.name}} ({{getNumberInStacks(item.amount)}} stacks)
         </mat-list-item>
-        <mat-list-item *ngIf="item.price.bulk_price">
-          {{item.price.bulk_price}} <mat-icon>diamond</mat-icon> for 1 Shulker Box of {{item.name}}
+        <mat-list-item *ngIf="item.bulk_price">
+          {{item.bulk_price}} <mat-icon>diamond</mat-icon> for 1 Shulker Box of {{item.name}}
         </mat-list-item>
       </mat-list>
       <mat-divider></mat-divider>
