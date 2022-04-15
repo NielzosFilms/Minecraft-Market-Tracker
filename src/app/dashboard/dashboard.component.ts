@@ -42,7 +42,7 @@ export class DashboardComponent {
   }
 
   private async getItemData() {
-    const items = await this.itemService.getItems();
+    const items = (await this.itemService.getItems()).filter(item => item.for_sale);
     const marketEntries = this.marketService.sortByDate(await this.marketService.getMarketEntries());
     items.forEach(item => {
       const itemMarketEntries = marketEntries.filter(entry => entry.item_id === item.id);

@@ -24,7 +24,7 @@ export class ItemService {
         categories.push({
           id: '',
           name: item.category,
-          items: [],
+          items: [item],
         })
       });
       resolve(categories);
