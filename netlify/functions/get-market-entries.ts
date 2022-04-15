@@ -34,13 +34,13 @@ export const handler: Handler = async (event, context) => {
 function mapResult(result: any): MarketEntry[] {
   return result.results.map((row: any): MarketEntry => ({
     id: row.id,
-    item_id: row[columns.item].relation[0].id,
+    item_id: row.properties[columns.item].relation[0].id,
     // item: null,
-    amount_of_diamonds: row[columns.price].number,
-    amount: row[columns.amount].number,
-    transaction_date: row[columns.date].date.start,
-    bulk: row[columns.bulk].checkbox,
-    was_purchase: row[columns.purchase].checkbox,
-    created_by: row["Property"].created_by.name,
+    amount_of_diamonds: row.properties[columns.price].number,
+    amount: row.properties[columns.amount].number,
+    transaction_date: row.properties[columns.date].date.start,
+    bulk: row.properties[columns.bulk].checkbox,
+    was_purchase: row.properties[columns.purchase].checkbox,
+    created_by: row.properties["Property"].created_by.name,
   }))
 }
