@@ -8,7 +8,6 @@ import {MatSliderModule} from "@angular/material/slider";
 
 import {MatButtonModule} from "@angular/material/button";
 import {MatListModule} from "@angular/material/list";
-import { LoginDialogComponent } from './login/login-dialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -23,27 +22,23 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { WhatWeSellComponent } from './what-we-sell/what-we-sell.component';
 import {MatTableModule} from "@angular/material/table";
 import { TeamComponent } from './team/team.component';
-import { MarketEntriesComponent } from './market-entries/market-entries.component';
-import { MarketEntriesCreateDialogComponent } from './market-entries-create-dialog/market-entries-create-dialog.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatSelectModule} from "@angular/material/select";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginDialogComponent,
     NavComponent,
     PageNotFoundComponent,
     DashboardComponent,
     WhatWeSellComponent,
     TeamComponent,
-    MarketEntriesComponent,
-    MarketEntriesCreateDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +64,7 @@ import {NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
     MatAutocompleteModule,
     MatPaginatorModule,
     NgxChartsModule,
+    HttpClientModule,
   ],
   providers: [
   ],

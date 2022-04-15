@@ -1,67 +1,29 @@
 import {Injectable} from "@angular/core";
-import {PostgrestResponse, SupabaseClient} from "@supabase/supabase-js";
-import {SupabaseService} from "../supabase.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MarketEntry, MarketEntryInput} from "./market-entry-type";
+import {MarketEntry} from "./market-entry-type";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketEntryService {
-  private supabase: SupabaseClient;
-
-  constructor(private _supabase: SupabaseService, private snackbar: MatSnackBar) {
-    this.supabase = _supabase.getClient();
+  constructor(private snackbar: MatSnackBar, private http: HttpClient) {
   }
 
   public getMarketEntries(): Promise<MarketEntry[]> {
-    return new Promise<MarketEntry[]>(async (resolve, reject) => {
-      this.supabase
-        .from('market_entry')
-        .select(`
-          *,
-          item:item_id (
-            *
-          )
-        `)
-        .order('transaction_date', {ascending: false})
-        .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
-    });
+    return new Promise<MarketEntry[]>(((resolve, reject) => {
+      this.http.get<MarketEntry[]>(`https://${window.location.host}/.netlify/functions/get-market-entries`)
+        .subscribe(result => resolve(result));
+    }))
   }
 
-  public getMarketEntriesASC(): Promise<MarketEntry[]> {
-    return new Promise<MarketEntry[]>(async (resolve, reject) => {
-      this.supabase
-        .from('market_entry')
-        .select(`
-          *,
-          item:item_id (
-            *
-          )
-        `)
-        .order('transaction_date', {ascending: true})
-        .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
-    });
+  private getTime(date?: Date) {
+    return date != null ? date.getTime() : 0;
   }
 
-  public createMarketEntry(entry: MarketEntryInput) {
-    return new Promise<MarketEntryInput>(async (resolve, reject) => {
-      this.supabase
-        .from('market_entry')
-        .insert(entry)
-        .then(result => this.handleResult<MarketEntryInput>(result, resolve, reject));
-    });
-  }
-
-  private handleResult<T>(result: PostgrestResponse<any>, resolve: any, reject: any) {
-    if(result.error?.message) {
-      this.snackbar.open(result.error.message, 'X', {
-        duration: 5000,
-        panelClass: "snackbar-error",
-      });
-      reject(result.error.message);
-    } else {
-      resolve(result.data as unknown as T);
-    }
+  public sortByDate(entries: MarketEntry[]): MarketEntry[] {
+    return entries.sort((a, b) =>
+      this.getTime(new Date(a.transaction_date)) - this.getTime(new Date(b.transaction_date)))
   }
 }

@@ -8,19 +8,5 @@
         <a href="https://github.com/NielzosFilms/Minecraft-Market-Tracker" target="_blank"><i class="fa fa-github" style="font-size: 20px"></i></a>
       </li>
     </ul>
-    <ul *ngIf="auth.isAuthenticated()" class="auth-routes">
-      <li *ngFor="let route of authRoutes">
-        <a routerLink="{{route.route}}" routerLinkActive="active">{{route.label}}</a>
-      </li>
-    </ul>
-    <div *ngIf="!auth.isAuthenticated()" class="auth-routes"></div>
-    <ul class="auth-buttons">
-      <li *ngIf="!auth.isAuthenticated()">
-        <a (click)="login()">Login</a>
-      </li>
-      <li *ngIf="auth.isAuthenticated()">
-        <a (click)="logout()">Logout</a>
-      </li>
-    </ul>
   </div>
 </nav>
