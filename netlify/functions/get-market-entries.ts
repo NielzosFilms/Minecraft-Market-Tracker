@@ -26,7 +26,8 @@ export const handler: Handler = async (event, context) => {
       'Content-Type': 'application/json'
     },
     statusCode: 200,
-    body: JSON.stringify(mapResult(result)),
+    // body: JSON.stringify(mapResult(result)),
+    body: JSON.stringify(result),
   }
 }
 
