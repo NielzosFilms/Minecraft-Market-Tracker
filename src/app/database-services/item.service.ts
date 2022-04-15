@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Category, Item, Price} from "./item-type";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {NotionService} from "../notion.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
-  constructor(private notion: NotionService, private snackbar: MatSnackBar) {
+  constructor(private snackbar: MatSnackBar) {
   }
 
   public getCategories(): Promise<Category[]> {

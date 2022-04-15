@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {MarketEntryService} from "../database-services/market-entry.service";
-import {NotionService} from "../notion.service";
 import {Item} from "../database-services/item-type";
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -14,13 +13,7 @@ export class DashboardComponent {
   saleData: GraphEntry[] = [];
   items: ItemWithLineGraph[] = [];
 
-  constructor(private notion: NotionService, private http: HttpClient, private marketService: MarketEntryService) {
-    notion.client.databases.query({
-      database_id: '6920a5d761134f828b64e7d313a5bfc3'
-    }).then(r => {
-      console.log(r)
-    })
-
+  constructor(private http: HttpClient, private marketService: MarketEntryService) {
     this.getSalesData();
 
     this.getItemData();
@@ -46,28 +39,6 @@ export class DashboardComponent {
         {name: "Diamonds spent", value: reduced.spent},
       ]
     });
-    // this.supabase
-    //   .from('market_entry')
-    //   .select('*')
-    //   .then(result => {
-    //     const reduced = result.data?.reduce((prev, cur) => {
-    //       if(cur.was_purchase) {
-    //         return {
-    //           ...prev,
-    //           spent: prev.spent = prev.spent + cur.amount_of_diamonds
-    //         };
-    //       } else {
-    //         return {
-    //           ...prev,
-    //           earned: prev.earned = prev.earned + cur.amount_of_diamonds
-    //         };
-    //       }
-    //     }, {earned: 0, spent: 0})
-    //     this.saleData = [
-    //       {name: "Diamonds earned", value: reduced.earned},
-    //       {name: "Diamonds spent", value: reduced.spent},
-    //     ]
-    //   });
   }
 
   private async getItemData() {

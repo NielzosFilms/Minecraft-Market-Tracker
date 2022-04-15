@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MarketEntry, MarketEntryInput} from "./market-entry-type";
+import {MarketEntry} from "./market-entry-type";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -13,53 +13,14 @@ export class MarketEntryService {
 
   public getMarketEntries(): Observable<MarketEntry[]> {
     return this.http.get<MarketEntry[]>(`https://${window.location.host}/.netlify/functions/get-market-entries`);
-    // return new Promise<MarketEntry[]>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('market_entry')
-      //   .select(`
-      //     *,
-      //     item:item_id (
-      //       *
-      //     )
-      //   `)
-      //   .order('transaction_date', {ascending: false})
-      //   .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
-    // });
   }
 
-  public getMarketEntriesASC(): Promise<MarketEntry[]> {
-    return new Promise<MarketEntry[]>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('market_entry')
-      //   .select(`
-      //     *,
-      //     item:item_id (
-      //       *
-      //     )
-      //   `)
-      //   .order('transaction_date', {ascending: true})
-      //   .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
-    });
+  private getTime(date?: Date) {
+    return date != null ? date.getTime() : 0;
   }
 
-  public createMarketEntry(entry: MarketEntryInput) {
-    return new Promise<MarketEntryInput>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('market_entry')
-      //   .insert(entry)
-      //   .then(result => this.handleResult<MarketEntryInput>(result, resolve, reject));
-    });
+  public sortByDate(entries: MarketEntry[]): MarketEntry[] {
+    return entries.sort((a, b) =>
+      this.getTime(a.transaction_date) - this.getTime(b.transaction_date))
   }
-
-  // private handleResult<T>(result: PostgrestResponse<any>, resolve: any, reject: any) {
-  //   if(result.error?.message) {
-  //     this.snackbar.open(result.error.message, 'X', {
-  //       duration: 5000,
-  //       panelClass: "snackbar-error",
-  //     });
-  //     reject(result.error.message);
-  //   } else {
-  //     resolve(result.data as unknown as T);
-  //   }
-  // }
 }

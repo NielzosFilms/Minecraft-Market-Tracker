@@ -27,7 +27,6 @@ export const handler: Handler = async (event, context) => {
     },
     statusCode: 200,
     body: JSON.stringify(mapResult(result)),
-    // body: JSON.stringify(result),
   }
 }
 
@@ -35,7 +34,6 @@ function mapResult(result: any): MarketEntry[] {
   return result.results.map((row: any): MarketEntry => ({
     id: row.id,
     item_id: row.properties[columns.item].relation[0].id,
-    // item: null,
     amount_of_diamonds: row.properties[columns.price].number,
     amount: row.properties[columns.amount].number,
     transaction_date: row.properties[columns.date].date.start,
