@@ -26,13 +26,18 @@ export const handler: Handler = async (event, context) => {
       'Content-Type': 'application/json'
     },
     statusCode: 200,
-    body: JSON.stringify(result),
+    body: JSON.stringify(mapResult(result)),
   }
 }
 
-// function mapResult(result: any): Item[] {
-//   return result.results.map((row: any): Item => ({
-//     id: row.id,
-//     name: row.properties[columns.name].
-//   }))
-// }
+function mapResult(result: any): Item[] {
+  return result.results.map((row: any): Item => ({
+    id: row.id,
+    name: row.properties[columns.name].title[0].text.content,
+    for_sale: row.properties[columns.for_sale].checkbox,
+    price: row.properties[columns.price]?.number || null,
+    amount: row.properties[columns.amount]?.number || null,
+    bulk_price: row.properties[columns.bulk_price]?.number || null,
+    category: row.properties[columns.category]?.select?.name || null,
+  }))
+}

@@ -1,79 +1,46 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Category, Item} from "./item-type";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
-  constructor(private snackbar: MatSnackBar) {
-  }
-
-  public getCategories(): Promise<Category[]> {
-    return new Promise<Category[]>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('category')
-      //   .select('*')
-      //   .order('name', {ascending: true})
-      //   .then(result => this.handleResult<Category[]>(result, resolve, reject));
-    })
+  constructor(private snackbar: MatSnackBar, private http: HttpClient) {
   }
 
   public getCategoriesWithItemsForSale(): Promise<Category[]> {
     return new Promise<Category[]>(async (resolve, reject) => {
-      const categories = await this.getCategories();
       const items = await this.getItemsForSaleWithPrices();
-      resolve(categories.map(category => {
-        return {
-          ...category,
-          // items: items.filter(item => item.category_id === category.id),
+      const categories: Category[] = [];
+      items.forEach(item => {
+        if (!item.category) return;
+        const foundCategory = categories.find(cat => cat.name === item.category);
+        if (foundCategory) {
+          categories[categories.indexOf(foundCategory)].items.push(item);
+          return;
         }
-      }));
-    })
+        categories.push({
+          id: '',
+          name: item.category,
+          items: [],
+        })
+      });
+      resolve(categories);
+    });
   }
 
-  public getItems(): Promise<Item[]> {
-    return new Promise<Item[]>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('item')
-      //   .select('*')
-      //   .order('name', {ascending: true})
-      //   .then(result => this.handleResult<Item[]>(result, resolve, reject));
-    })
+  public getItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(`https://${window.location.host}/.netlify/functions/get-items`);
   }
 
   public getItemsForSaleWithPrices(): Promise<Item[]> {
     return new Promise<Item[]>(async (resolve, reject) => {
-      const itemsForSale = await this.getItemsForSale();
-      resolve(itemsForSale.map(item => {
-        return {
-          ...item,
-          // price: prices.find(price => price.item_id === item.id),
-        }
-      }));
-    });
+      this.getItems().subscribe(items => {
+        resolve(items.filter(item => item.for_sale));
+      })
+    })
   }
-
-  public getItemsForSale(): Promise<Item[]> {
-    return new Promise<Item[]>(async (resolve, reject) => {
-      // this.supabase
-      //   .from('item')
-      //   .select('*')
-      //   .is('for_sale', true)
-      //   .order('name', {ascending: true})
-      //   .then(result => this.handleResult<Item[]>(result, resolve, reject));
-    });
-  }
-
-  // private handleResult<T>(result: PostgrestResponse<any>, resolve: any, reject: any) {
-  //   if(result.error?.message) {
-  //     this.snackbar.open(result.error.message, 'X', {
-  //       duration: 5000,
-  //       panelClass: "snackbar-error",
-  //     });
-  //     reject(result.error.message);
-  //   } else {
-  //     resolve(result.data as unknown as T);
-  //   }
-  // }
 }

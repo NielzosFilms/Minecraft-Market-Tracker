@@ -13,7 +13,7 @@ export interface Item {
   price?: number;
   amount?: number;
   bulk_price?: number;
-  // category?: Category;
+  category?: string;
 }
 
 export class FormItemValidator {
