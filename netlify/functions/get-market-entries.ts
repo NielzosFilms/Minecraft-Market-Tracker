@@ -32,7 +32,7 @@ export const handler: Handler = async (event, context) => {
 }
 
 function mapResult(result: any): MarketEntry[] {
-  return result.result.map((row: any): MarketEntry => ({
+  return result.results.map((row: any): MarketEntry => ({
     id: row.id,
     item_id: row[columns.item].relation[0].id,
     // item: null,
