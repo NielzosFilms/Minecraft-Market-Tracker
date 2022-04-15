@@ -24,6 +24,6 @@ export class MarketEntryService {
 
   public sortByDate(entries: MarketEntry[]): MarketEntry[] {
     return entries.sort((a, b) =>
-      this.getTime(a.transaction_date) - this.getTime(b.transaction_date))
+      this.getTime(new Date(a.transaction_date)) - this.getTime(new Date(b.transaction_date)))
   }
 }
