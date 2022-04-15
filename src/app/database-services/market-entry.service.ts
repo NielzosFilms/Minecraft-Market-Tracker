@@ -1,16 +1,19 @@
 import {Injectable} from "@angular/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MarketEntry, MarketEntryInput} from "./market-entry-type";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketEntryService {
-  constructor(private snackbar: MatSnackBar) {
+  constructor(private snackbar: MatSnackBar, private http: HttpClient) {
   }
 
-  public getMarketEntries(): Promise<MarketEntry[]> {
-    return new Promise<MarketEntry[]>(async (resolve, reject) => {
+  public getMarketEntries(): Observable<MarketEntry[]> {
+    return this.http.get<MarketEntry[]>(`https://${window.location.host}/.netlify/functions/get-market-entries`);
+    // return new Promise<MarketEntry[]>(async (resolve, reject) => {
       // this.supabase
       //   .from('market_entry')
       //   .select(`
@@ -21,7 +24,7 @@ export class MarketEntryService {
       //   `)
       //   .order('transaction_date', {ascending: false})
       //   .then(result => this.handleResult<MarketEntry[]>(result, resolve, reject));
-    });
+    // });
   }
 
   public getMarketEntriesASC(): Promise<MarketEntry[]> {

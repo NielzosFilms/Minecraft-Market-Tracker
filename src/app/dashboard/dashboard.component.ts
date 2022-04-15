@@ -21,24 +21,31 @@ export class DashboardComponent {
       console.log(r)
     })
 
-    // http.get(`https://api.notion.com/v1/databases/6920a5d761134f828b64e7d313a5bfc3/query`, {
-    //   headers: new HttpHeaders({
-    //     'Authorization': `Bearer ${environment.notion_key}`,
-    //     // 'Content-Type': 'application/json',
-    //     // 'Access-Control-Allow-Credentials': 'true',
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Notion-Version': '2021-08-16'
-    //   }),
-    // }).subscribe(result => {
-    //   console.log(result);
-    // })
-
     this.getSalesData();
 
     this.getItemData();
   }
 
   private getSalesData() {
+    this.marketService.getMarketEntries().subscribe(result => {
+      const reduced = result.reduce((prev, cur) => {
+        if (cur.was_purchase) {
+          return {
+            ...prev,
+            spent: prev.spent = prev.spent + cur.amount_of_diamonds
+          };
+        } else {
+          return {
+            ...prev,
+            earned: prev.earned = prev.earned + cur.amount_of_diamonds
+          };
+        }
+      }, {earned: 0, spent: 0})
+      this.saleData = [
+        {name: "Diamonds earned", value: reduced.earned},
+        {name: "Diamonds spent", value: reduced.spent},
+      ]
+    });
     // this.supabase
     //   .from('market_entry')
     //   .select('*')
