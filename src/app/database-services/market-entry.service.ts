@@ -11,8 +11,11 @@ export class MarketEntryService {
   constructor(private snackbar: MatSnackBar, private http: HttpClient) {
   }
 
-  public getMarketEntries(): Observable<MarketEntry[]> {
-    return this.http.get<MarketEntry[]>(`https://${window.location.host}/.netlify/functions/get-market-entries`);
+  public getMarketEntries(): Promise<MarketEntry[]> {
+    return new Promise<MarketEntry[]>(((resolve, reject) => {
+      this.http.get<MarketEntry[]>(`https://${window.location.host}/.netlify/functions/get-market-entries`)
+        .subscribe(result => resolve(result));
+    }))
   }
 
   private getTime(date?: Date) {

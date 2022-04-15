@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {MarketEntryService} from "../database-services/market-entry.service";
 import {Item} from "../database-services/item-type";
-import {environment} from "../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
+import {ItemService} from "../database-services/item.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,14 +13,14 @@ export class DashboardComponent {
   saleData: GraphEntry[] = [];
   items: ItemWithLineGraph[] = [];
 
-  constructor(private http: HttpClient, private marketService: MarketEntryService) {
+  constructor(private http: HttpClient, private marketService: MarketEntryService, private itemService: ItemService) {
     this.getSalesData();
 
     this.getItemData();
   }
 
   private getSalesData() {
-    this.marketService.getMarketEntries().subscribe(result => {
+    this.marketService.getMarketEntries().then(result => {
       const reduced = result.reduce((prev, cur) => {
         if (cur.was_purchase) {
           return {
@@ -42,22 +42,21 @@ export class DashboardComponent {
   }
 
   private async getItemData() {
-    //   const items = await this.itemService.getItems();
-    //   const marketEntries = await this.marketService.getMarketEntriesASC();
-    //
-    //   items.forEach(item => {
-    //     const itemMarketEntries = marketEntries.filter(entry => entry.item_id === item.id);
-    //     this.items.push({
-    //       ...item,
-    //       graphData: [{
-    //         name: item.name,
-    //         series: itemMarketEntries.map<GraphEntry>(entry => ({
-    //           value: Math.round(entry.amount / entry.amount_of_diamonds * 100) / 100,
-    //           name: new Date(entry.transaction_date).toDateString(),
-    //         }))
-    //       }]
-    //     })
-    //   });
+    const items = await this.itemService.getItems();
+    const marketEntries = this.marketService.sortByDate(await this.marketService.getMarketEntries());
+    items.forEach(item => {
+      const itemMarketEntries = marketEntries.filter(entry => entry.item_id === item.id);
+      this.items.push({
+        ...item,
+        graphData: [{
+          name: item.name,
+          series: itemMarketEntries.map<GraphEntry>(entry => ({
+            value: Math.round(entry.amount / entry.amount_of_diamonds * 100) / 100,
+            name: new Date(entry.transaction_date).toDateString(),
+          }))
+        }]
+      })
+    });
   }
 
 }
