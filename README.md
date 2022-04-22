@@ -15,19 +15,12 @@ This project keeps track of the sales on our Minecraft Server
 ## Getting it running
 Clone the repo
 
-Run:
+Install dependencies:
 ```shell
 npm install
 ```
 
-Copy the `environment-template.ts` to 
-- `environment.ts`
-- `environment.spec.ts`
-- `environment.prod.ts`
-
-And fill in the Supabase credentials.
-
-Finally start the app:
+Start the app:
 ```shell
 npm start
 ```
