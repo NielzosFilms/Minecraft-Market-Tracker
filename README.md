@@ -6,12 +6,11 @@ This project keeps track of the sales on our Minecraft Server
 **Stuff used**
 - [Angular](https://angular.io/)
 - [Angular Material Design](https://material.angular.io/)
-- [Supabase](https://supabase.com/)
+- [Notion](https://www.notion.so) (For the database)
 - [ngx-charts](https://swimlane.github.io/ngx-charts/#/ngx-charts/bar-vertical)
 
 **Hosting**
 - [Netlify](https://www.netlify.com/)
-- [Supabase](https://supabase.com/)
 
 ## Getting it running
 Clone the repo
